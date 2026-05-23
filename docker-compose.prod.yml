@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  vedaai-mongodb:
+    image: mongo:7
+    container_name: vedaai-mongodb-prod
+    restart: always
+    ports:
+      - '127.0.0.1:27017:27017'
+    volumes:
+      - mongodb_data_prod:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: vedaai
+
+  vedaai-redis:
+    image: redis:7-alpine
+    container_name: vedaai-redis-prod
+    restart: always
+    ports:
+      - '127.0.0.1:6379:6379'
+    volumes:
+      - redis_data_prod:/data
+
+  vedaai-server:
+    image: ghcr.io/${GITHUB_REPOSITORY_OWNER}/vedaai-server:latest
+    container_name: vedaai-server-prod
+    restart: always
+    ports:
+      - '127.0.0.1:5000:5000'
+      - '127.0.0.1:5001:5001'
+    env_file:
+      - .env
+    environment:
+      MONGODB_URI: mongodb://vedaai-mongodb:27017/vedaai
+      REDIS_URL: redis://vedaai-redis:6379
+      PORT: 5000
+      WS_PORT: 5001
+    depends_on:
+      - vedaai-mongodb
+      - vedaai-redis
+    volumes:
+      - server_uploads:/app/uploads
+
+  vedaai-client:
+    image: ghcr.io/${GITHUB_REPOSITORY_OWNER}/vedaai-client:latest
+    container_name: vedaai-client-prod
+    restart: always
+    ports:
+      - '127.0.0.1:3000:3000'
+    env_file:
+      - .env
+    environment:
+      PORT: 3000
+
+volumes:
+  mongodb_data_prod:
+  redis_data_prod:
+  server_uploads:
