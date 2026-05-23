@@ -2,11 +2,8 @@
 import { usePathname, useRouter } from 'next/navigation';
 
 const navItems = [
-  { label: 'Home', icon: '⊞', href: '/' },
-  { label: 'My Groups', icon: '👥', href: '#' },
-  { label: 'Assignments', icon: '📄', href: '/assignments', badge: null },
-  { label: "AI Teacher's Toolkit", icon: '🤖', href: '#' },
-  { label: 'My Library', icon: '📚', href: '#', badge: '32' },
+  { label: 'Project Overview & Architecture', icon: '🏗️', href: '/' },
+  { label: 'Main Project', icon: '🚀', href: '/assignments', badge: null },
 ];
 
 export default function Sidebar({ assignmentCount }: { assignmentCount?: number }) {
