@@ -381,7 +381,7 @@ input,select,textarea { font-family:inherit; }
     justify-content:center;
   }
   .floating-create-btn:hover { transform:scale(1.05); }
-  .floating-create-btn span { display:none; }
+  .floating-btn-text { display:none; }
 
   /* Page header */
   .page-header { margin-bottom:16px; }

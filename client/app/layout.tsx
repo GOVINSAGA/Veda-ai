@@ -14,15 +14,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
+        <MobileHeader />
         <div className="app-layout">
           <Sidebar />
-          <MobileHeader />
           <div className="main-area">
             <TopBar />
             <div className="page-content">{children}</div>
           </div>
-          <MobileBottomNav />
         </div>
+        <MobileBottomNav />
       </body>
     </html>
   );

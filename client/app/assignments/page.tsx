@@ -132,7 +132,7 @@ export default function AssignmentsPage() {
       </div>
 
       <button className="floating-create-btn" onClick={() => router.push('/assignments/create')}>
-        + Create Assignment
+        + <span className="floating-btn-text">Create Assignment</span>
       </button>
     </>
   );
