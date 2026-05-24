@@ -6,7 +6,7 @@ services:
     container_name: vedaai-mongodb-prod
     restart: always
     ports:
-      - '127.0.0.1:27017:27017'
+      - '127.0.0.1:27018:27017'
     volumes:
       - mongodb_data_prod:/data/db
     environment:

@@ -2,8 +2,15 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { useAssignmentStore } from '../store/useAssignmentStore';
 
-const WS_URL = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:5001';
-
+const getWsUrl = () => {
+  if (process.env.NEXT_PUBLIC_WS_URL) return process.env.NEXT_PUBLIC_WS_URL;
+  if (typeof window !== 'undefined') {
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    return `${protocol}//${window.location.host}/ws`;
+  }
+  return 'ws://localhost:5001';
+};
+const WS_URL = getWsUrl();
 export function useWebSocket() {
   const wsRef = useRef<WebSocket | null>(null);
   const reconnectTimer = useRef<NodeJS.Timeout | null>(null);
